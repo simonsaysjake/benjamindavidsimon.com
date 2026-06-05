@@ -57,6 +57,21 @@ a { color: inherit; }
   transition: transform .12s ease, box-shadow .12s ease;
 }
 .announce__cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+.live-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 0 rgba(204,0,0,.7);
+  animation: pulse 1.5s infinite;
+  vertical-align: middle;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(204,0,0,.6); }
+  70%  { box-shadow: 0 0 0 7px rgba(204,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(204,0,0,0); }
+}
 
 /* ===== Brand bar ===== */
 .topbar {
@@ -154,6 +169,35 @@ a { color: inherit; }
   font-style: italic;
 }
 .quote span { font-style: normal; font-weight: 600; }
+
+/* ===== KPI strip ===== */
+.kpis {
+  background: var(--dark);
+  color: #f4f4f4;
+  padding: 30px 24px;
+}
+.kpis__grid {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 8px;
+}
+.kpi__num {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 700;
+  color: #8ab4f8;
+  line-height: 1;
+}
+.kpi__label { font-size: .85rem; color: #c7c7c7; font-weight: 300; }
+.kpi__label em { font-style: normal; opacity: .7; }
 
 /* ===== Content ===== */
 .content {
@@ -256,10 +300,22 @@ a { color: inherit; }
 }
 .footer p { margin: 4px 0; }
 .footer__legal { color: #9a9a9a; }
+.footer__status { color: #d8d8d8; font-weight: 500; margin-bottom: 10px !important; }
+.footer__dim { color: #9a9a9a; font-weight: 300; }
+.status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #34a853;
+  box-shadow: 0 0 8px rgba(52,168,83,.8);
+  vertical-align: middle;
+  margin-right: 4px;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
   .content__grid { grid-template-columns: 1fr; gap: 40px; }
   .content { padding: 48px 22px; }
   .banner__quotes { gap: 8px 28px; }
+  .kpis__grid { grid-template-columns: repeat(2, 1fr); gap: 22px 12px; }
 }

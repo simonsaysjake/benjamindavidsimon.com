@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Keep this off search engines — it's a private family/friends site -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+
   <title>Tiny Human — Benjamin David Simon</title>
   <meta name="description" content="Benjamin David Simon. Vision: Developing. Mission: Clear. The official site of one very small, very effective tiny human." />
 
@@ -27,7 +32,7 @@
   <!-- Announcement bar -->
   <div class="announce">
     <span class="announce__text">Tiny Human deployed to production.</span>
-    <a class="announce__cta" href="https://www.youtube.com/watch?v=P-MCFmyYCTc" target="_blank" rel="noopener">View Live Cam</a>
+    <a class="announce__cta" href="https://www.youtube.com/watch?v=P-MCFmyYCTc" target="_blank" rel="noopener nofollow"><span class="live-dot" aria-hidden="true"></span>View Live Cam</a>
   </div>
 
   <!-- Brand bar -->
@@ -57,6 +62,16 @@
     <div class="banner__quotes">
       <p class="quote">&ldquo;Very loud, but effective.&rdquo; <span>&ndash; Mom</span></p>
       <p class="quote">&ldquo;Shows great potential.&rdquo; <span>&ndash; Dad</span></p>
+    </div>
+  </section>
+
+  <!-- KPI strip -->
+  <section class="kpis" aria-label="Key performance indicators">
+    <div class="kpis__grid">
+      <div class="kpi"><span class="kpi__num">24/7</span><span class="kpi__label">Uptime <em>(crying included)</em></span></div>
+      <div class="kpi"><span class="kpi__num">∞</span><span class="kpi__label">Diapers deployed</span></div>
+      <div class="kpi"><span class="kpi__num">0</span><span class="kpi__label">Words spoken <em>(roadmapped)</em></span></div>
+      <div class="kpi"><span class="kpi__num">100%</span><span class="kpi__label">Stakeholder cuteness</span></div>
     </div>
   </section>
 
@@ -125,9 +140,15 @@
 
   <!-- Footer -->
   <footer class="footer">
+    <p class="footer__status"><span class="status-dot" aria-hidden="true"></span> All systems operational <span class="footer__dim">(subject to nap schedule)</span></p>
     <p>&copy; 2025 Benjamin David Simon.</p>
     <p class="footer__legal"><strong>Legal notice:</strong> May contain spit-up.</p>
   </footer>
+
+  <script>
+    console.log("%c👶 Tiny Human v1.0.0 — now serving milk-driven content.", "font-size:14px;font-weight:700;color:#1c4587;");
+    console.log("%cHiring soon: Junior VP of Peekaboo. No experience required.", "color:#5f6368;");
+  </script>
 
 </body>
 </html>
