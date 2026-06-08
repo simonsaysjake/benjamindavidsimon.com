@@ -210,15 +210,37 @@
       peekBusy = true;
       peek.classList.remove("open");
       setPeekTxt("Where’s Benji?");
+      peek.classList.remove("done");
       peek.classList.add("show");                 // slow cover (~1.15s), hold while covered
       setTimeout(function () {                     // after cover + ~1s pause, reveal
         setPeekTxt("There he is!");
         peek.classList.add("open");
       }, 2200);
-      setTimeout(function () {                     // let "There he is!" linger, then reset
-        peek.classList.remove("show", "open");
+      setTimeout(function () {                     // let "There he is!" linger, then fade out
+        peek.classList.add("done");
+      }, 3800);
+      setTimeout(function () {                     // reset
+        peek.classList.remove("show", "open", "done");
         peekBusy = false;
-      }, 3600);
+      }, 4400);
+    });
+  }
+
+  /* ---------- Hero name → random nickname ---------- */
+  var heroName = document.getElementById("heroName");
+  if (heroName) {
+    var NAMES = ["Benjamin David Simon", "Ben-Jammin’", "Benji", "Benjito", "B-Dog", "Ben", "Mr. Boy"];
+    function swapName() {
+      var cur = heroName.textContent.trim(), pick = cur;
+      while (pick === cur) pick = NAMES[(Math.random() * NAMES.length) | 0];
+      heroName.textContent = pick;
+      heroName.classList.remove("swap");
+      void heroName.offsetWidth; // restart animation
+      if (!reduce) heroName.classList.add("swap");
+    }
+    heroName.addEventListener("click", swapName);
+    heroName.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); swapName(); }
     });
   }
 
@@ -234,13 +256,26 @@
       pos = (k === SEQ[0]) ? 1 : 0;
     }
   });
+  var partyEl = document.getElementById("party");
+  var partyBusy = false;
   function party() {
+    if (partyBusy) return;
+    partyBusy = true;
     toast("Achievement unlocked: Founder Mode");
-    if (reduce) return;
-    var n = 0;
-    var t = setInterval(function () {
-      confetti(Math.random() * window.innerWidth, -10, 16);
-      if (++n > 9) clearInterval(t);
-    }, 170);
+    if (partyEl) partyEl.classList.add("show");
+    if (!reduce) {
+      confetti(window.innerWidth / 2, window.innerHeight * 0.45, 90); // big center burst
+      var n = 0;
+      var t = setInterval(function () {
+        confetti(Math.random() * window.innerWidth, -10, 24);                   // rain from top
+        confetti(40, window.innerHeight - 16, 16);                              // bottom-left jet
+        confetti(window.innerWidth - 40, window.innerHeight - 16, 16);          // bottom-right jet
+        if (++n > 22) clearInterval(t);                                         // ~4s
+      }, 180);
+    }
+    setTimeout(function () {
+      if (partyEl) partyEl.classList.remove("show");
+      partyBusy = false;
+    }, 4200);
   }
 })();

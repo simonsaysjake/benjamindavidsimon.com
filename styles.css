@@ -187,6 +187,16 @@ a { color: inherit; }
   margin: 0 0 .4em;
   line-height: 1.05;
   text-shadow: 0 2px 24px rgba(0,0,0,.45);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.hero__title:focus-visible { outline: 2px solid rgba(255,255,255,.85); outline-offset: 8px; border-radius: 8px; }
+.hero__title.swap { animation: nameSwap .4s cubic-bezier(.3,1.4,.5,1); }
+@keyframes nameSwap {
+  0%   { transform: scale(.9);  opacity: .35; }
+  55%  { transform: scale(1.05); }
+  100% { transform: scale(1);   opacity: 1; }
 }
 .hero__tagline {
   font-size: clamp(1rem, 2.4vw, 1.5rem);
@@ -748,17 +758,53 @@ a { color: inherit; }
 .peekaboo.open .peekaboo__panel { transition: transform .6s cubic-bezier(.5,0,.35,1); }
 .peekaboo.open .peekaboo__panel--l { transform: translateX(-105%); }
 .peekaboo.open .peekaboo__panel--r { transform: translateX(105%); }
+/* dimming backdrop so the reveal text is readable once panels open */
+.peekaboo__scrim {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at center, rgba(10,18,42,.82), rgba(5,9,22,.94));
+  opacity: 0; transition: opacity .55s ease;
+}
+.peekaboo.open .peekaboo__scrim { opacity: 1; }
+.peekaboo.done .peekaboo__scrim { opacity: 0; }
 .peekaboo__word {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 14px;
   color: #fff; font-size: clamp(2rem, 8vw, 4rem); font-weight: 700; text-align: center; padding: 0 20px;
-  text-shadow: 0 2px 24px rgba(0,0,0,.55), 0 0 3px rgba(0,0,0,.4);
+  text-shadow: 0 2px 24px rgba(0,0,0,.6), 0 0 3px rgba(0,0,0,.5);
   opacity: 0; transform: scale(.82); transition: opacity .35s ease, transform .4s cubic-bezier(.3,1.5,.5,1);
 }
 .peekaboo.show .peekaboo__word { opacity: 1; transform: scale(1); }
 .peekaboo.open .peekaboo__word { opacity: 1; transform: scale(1); animation: pop .55s cubic-bezier(.3,1.5,.5,1); }
+.peekaboo.done .peekaboo__word { opacity: 0; }
 @keyframes pop { 0% { transform: scale(.8); } 60% { transform: scale(1.09); } 100% { transform: scale(1); } }
 .peekaboo__eye { width: .9em; height: .9em; display: none; }
 .peekaboo.open .peekaboo__eye { display: inline-block; }
+
+/* ===== Konami "Founder Mode" party ===== */
+.party {
+  position: fixed; inset: 0; z-index: 205;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; opacity: 0; visibility: hidden;
+  transition: opacity .4s ease, visibility .4s ease;
+  background: radial-gradient(circle at center, rgba(22,34,78,.62), rgba(7,11,26,.86));
+}
+.party.show { opacity: 1; visibility: visible; }
+.party__card {
+  text-align: center; color: #fff; padding: 0 24px;
+  transform: scale(.55) translateY(24px); opacity: 0;
+  transition: transform .55s cubic-bezier(.2,1.6,.4,1), opacity .4s ease;
+}
+.party.show .party__card { transform: scale(1) translateY(0); opacity: 1; }
+.party__icon { width: 68px; height: 68px; color: #ffd66e; filter: drop-shadow(0 6px 22px rgba(245,166,35,.55)); animation: partyspin 4s linear infinite; }
+@keyframes partyspin { from { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } to { transform: rotate(-8deg); } }
+.party__title {
+  font-size: clamp(2.6rem, 9vw, 5rem); font-weight: 700; margin: .15em 0 .08em; line-height: 1;
+  background: linear-gradient(90deg, #ffd66e, #ff8a5c, #ff6ea9, #8ab4f8, #5dd29a, #ffd66e);
+  background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: partyhue 3s linear infinite;
+}
+@keyframes partyhue { to { background-position: 220% center; } }
+.party__sub { font-size: 1.15rem; color: #e0e7f6; margin: 0 0 16px; font-weight: 300; }
+.party__hint { font-family: var(--mono); font-size: .78rem; color: #93a6cc; letter-spacing: 3px; margin: 0; }
 
 /* ===== Confetti + toast ===== */
 .confetti-layer { position: fixed; inset: 0; z-index: 190; pointer-events: none; overflow: hidden; }
