@@ -278,4 +278,82 @@
       partyBusy = false;
     }, 4200);
   }
+
+  /* ---------- Soundboard (Web Audio, synthesized — no recordings) ---------- */
+  var actx = null;
+  function audioCtx() {
+    if (!actx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) actx = new AC();
+    }
+    if (actx && actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function beep(ctx, t0, f0, f1, dur, type, peak) {
+    var o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type || "triangle";
+    o.frequency.setValueAtTime(f0, t0);
+    if (f1 && f1 !== f0) o.frequency.linearRampToValueAtTime(f1, t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.linearRampToValueAtTime(peak || 0.18, t0 + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0008, t0 + dur);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(t0); o.stop(t0 + dur + 0.03);
+  }
+  function playSound(kind) {
+    var ctx = audioCtx(); if (!ctx) return;
+    var t = ctx.currentTime + 0.02, i;
+    if (kind === "giggle") {
+      var gi = [720, 840, 650, 900, 620, 780];
+      for (i = 0; i < gi.length; i++) { var f = gi[i] * (0.95 + Math.random() * 0.1); beep(ctx, t + i * 0.105, f, f * 1.18, 0.085, "triangle", 0.2); }
+    } else if (kind === "babble") {
+      var ba = [430, 540, 430, 580, 470];
+      for (i = 0; i < ba.length; i++) beep(ctx, t + i * 0.16, ba[i], ba[i] * 0.88, 0.12, "square", 0.12);
+    } else if (kind === "coo") {
+      beep(ctx, t, 420, 660, 0.5, "sine", 0.22);
+      beep(ctx, t + 0.42, 660, 470, 0.45, "sine", 0.17);
+    } else if (kind === "raspberry") {
+      var o = ctx.createOscillator(), g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
+      o.type = "sawtooth"; o.frequency.value = 105;
+      lfo.type = "square"; lfo.frequency.value = 30; lg.gain.value = 0.5;
+      lfo.connect(lg); lg.connect(g.gain);
+      g.gain.setValueAtTime(0.18, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(t); lfo.start(t); o.stop(t + 0.5); lfo.stop(t + 0.5);
+    } else if (kind === "squeal") {
+      beep(ctx, t, 620, 1500, 0.32, "sine", 0.16);
+      beep(ctx, t + 0.18, 1500, 1180, 0.18, "sine", 0.12);
+    }
+  }
+  var sndBtns = document.querySelectorAll(".snd");
+  for (var sb = 0; sb < sndBtns.length; sb++) {
+    sndBtns[sb].addEventListener("click", function () {
+      playSound(this.getAttribute("data-sound"));
+      var el = this;
+      el.classList.add("playing");
+      setTimeout(function () { el.classList.remove("playing"); }, 220);
+    });
+  }
+
+  /* ---------- Help overlay (press ?) ---------- */
+  var help = document.getElementById("help");
+  var helpClose = document.getElementById("helpClose");
+  function isTyping(e) {
+    var n = e.target && e.target.tagName;
+    return n === "INPUT" || n === "TEXTAREA" || (e.target && e.target.isContentEditable);
+  }
+  function toggleHelp(force) {
+    if (!help) return;
+    var open = force != null ? force : !help.classList.contains("show");
+    help.classList.toggle("show", open);
+    help.setAttribute("aria-hidden", open ? "false" : "true");
+  }
+  document.addEventListener("keydown", function (e) {
+    if (isTyping(e)) return;
+    if (e.key === "?") { e.preventDefault(); toggleHelp(); }
+    else if (e.key === "Escape" && help && help.classList.contains("show")) toggleHelp(false);
+  });
+  if (helpClose) helpClose.addEventListener("click", function () { toggleHelp(false); });
+  if (help) help.addEventListener("click", function (e) { if (e.target === help) toggleHelp(false); });
 })();

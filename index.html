@@ -37,7 +37,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <!-- NOTE: bump ?v= on every styles.css / app.js change to bust Cloudflare's 4h asset cache -->
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
 
@@ -131,10 +131,10 @@
 
       <div class="metric-grid">
         <article class="metric reveal">
-          <div class="metric__top"><span class="metric__icon"><svg class="ico"><use href="#i-smile"/></svg></span><span class="trend up">▲ +4 QoQ</span></div>
-          <div class="metric__num"><span data-count="6">0</span></div>
+          <div class="metric__top"><span class="metric__icon"><svg class="ico"><use href="#i-smile"/></svg></span><span class="trend up">▲ +2 QoQ</span></div>
+          <div class="metric__num"><span data-count="2">0</span></div>
           <div class="metric__label">Teeth shipped</div>
-          <div class="bar"><i style="--w:60%"></i></div>
+          <div class="bar"><i style="--w:20%"></i></div>
         </article>
 
         <article class="metric reveal">
@@ -310,7 +310,7 @@
             </div>
             <ul class="notes">
               <li class="add"><code>+</code> Crawling promoted to <b>GA</b></li>
-              <li class="add"><code>+</code> Shipped 6 teeth (rolling release)</li>
+              <li class="add"><code>+</code> Shipped 2 teeth (rolling release)</li>
               <li class="add"><code>+</code> Waves “bye-bye”; pincer grasp <em>(beta)</em></li>
               <li class="chg"><code>~</code> Consolidated nap schedule 3 → 2</li>
               <li class="warn"><code>!</code> Known issue: separation anxiety on parent exit</li>
@@ -449,14 +449,51 @@
     </div>
   </section>
 
+  <!-- ===== Soundboard ===== -->
+  <section class="soundboard" id="sounds" aria-label="Soundboard">
+    <div class="soundboard__inner">
+      <p class="eyebrow">Audio API · synthesized, no recordings</p>
+      <h2 class="soundboard__title">Press for service</h2>
+      <p class="soundboard__lead">On-demand baby noises, generated live in your browser. No actual babies were recorded.</p>
+      <div class="sound-grid">
+        <button class="snd" type="button" data-sound="giggle"><svg class="ico"><use href="#i-smile"/></svg> Giggle</button>
+        <button class="snd" type="button" data-sound="babble"><svg class="ico"><use href="#i-msg"/></svg> Babble</button>
+        <button class="snd" type="button" data-sound="coo"><svg class="ico"><use href="#i-heart"/></svg> Coo</button>
+        <button class="snd" type="button" data-sound="raspberry"><svg class="ico"><use href="#i-party"/></svg> Raspberry</button>
+        <button class="snd" type="button" data-sound="squeal"><svg class="ico"><use href="#i-sun"/></svg> Squeal</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden-features / easter-egg help overlay (press ?) -->
+  <div class="help" id="help" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Hidden features">
+    <div class="help__card">
+      <button class="help__close" id="helpClose" type="button" aria-label="Close">&times;</button>
+      <p class="eyebrow">Easter eggs</p>
+      <h2 class="help__title">Hidden features</h2>
+      <p class="help__lead">A few things to play with around the site:</p>
+      <ul class="help__list">
+        <li><span class="help__act">Tap the name</span><span>&ldquo;Benjamin David Simon&rdquo; in the hero cycles his nicknames</span></li>
+        <li><span class="help__act">Click the logo</span><span>The BDS logo (top-left) plays peekaboo</span></li>
+        <li><span class="help__act">Click a &ldquo;Shipped&rdquo; card</span><span>Confetti on the roadmap board</span></li>
+        <li><span class="help__act">Press for service</span><span>The soundboard plays synthesized baby noises</span></li>
+        <li><span class="help__act">Night shift</span><span>Toggle dark mode in the top nav</span></li>
+        <li><span class="help__act"><code>↑↑↓↓←→←→ B A</code></span><span>The Konami code unlocks Founder Mode</span></li>
+        <li><span class="help__act">Dev console</span><span>There&rsquo;s a message waiting in the browser console</span></li>
+      </ul>
+      <p class="help__foot">Press <kbd>?</kbd> or <kbd>Esc</kbd> to close</p>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <p class="footer__status"><span class="status-dot" aria-hidden="true"></span> All systems operational <span class="footer__dim">(subject to nap schedule)</span></p>
     <p>&copy; 2025 Benjamin David Simon.</p>
     <p class="footer__legal"><strong>Legal notice:</strong> May contain spit-up.</p>
+    <p class="footer__hint">Tip: press <kbd>?</kbd> to reveal hidden features</p>
   </footer>
 
-  <script src="app.js?v=3" defer></script>
+  <script src="app.js?v=4" defer></script>
   <script>
     console.log("%c👶 Tiny Human v0.9.0 — now crawling.", "font-size:14px;font-weight:700;color:#1c4587;");
     console.log("%cHiring soon: Junior VP of Peekaboo. No experience required.", "color:#5f6368;");
