@@ -741,19 +741,24 @@ a { color: inherit; }
 .peekaboo { position: fixed; inset: 0; z-index: 200; pointer-events: none; visibility: hidden; }
 .peekaboo.show { visibility: visible; }
 .peekaboo__panel { position: absolute; top: 0; bottom: 0; width: 52%; background: linear-gradient(135deg, #1c4587, #0c1f4a);
-  transform: translateX(-105%); transition: transform .42s cubic-bezier(.7,0,.3,1); }
+  transform: translateX(-105%); transition: transform 1.15s cubic-bezier(.55,0,.3,1); }
 .peekaboo__panel--r { right: 0; transform: translateX(105%); }
 .peekaboo.show .peekaboo__panel--l { transform: translateX(0); }
 .peekaboo.show .peekaboo__panel--r { transform: translateX(0); }
+.peekaboo.open .peekaboo__panel { transition: transform .6s cubic-bezier(.5,0,.35,1); }
 .peekaboo.open .peekaboo__panel--l { transform: translateX(-105%); }
 .peekaboo.open .peekaboo__panel--r { transform: translateX(105%); }
 .peekaboo__word {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px;
-  color: #fff; font-size: clamp(2rem, 8vw, 4rem); font-weight: 700;
-  opacity: 0; transform: scale(.7); transition: opacity .25s ease, transform .35s cubic-bezier(.3,1.6,.5,1);
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 14px;
+  color: #fff; font-size: clamp(2rem, 8vw, 4rem); font-weight: 700; text-align: center; padding: 0 20px;
+  text-shadow: 0 2px 24px rgba(0,0,0,.55), 0 0 3px rgba(0,0,0,.4);
+  opacity: 0; transform: scale(.82); transition: opacity .35s ease, transform .4s cubic-bezier(.3,1.5,.5,1);
 }
-.peekaboo__word .ico { width: .9em; height: .9em; }
-.peekaboo.open .peekaboo__word { opacity: 1; transform: scale(1); }
+.peekaboo.show .peekaboo__word { opacity: 1; transform: scale(1); }
+.peekaboo.open .peekaboo__word { opacity: 1; transform: scale(1); animation: pop .55s cubic-bezier(.3,1.5,.5,1); }
+@keyframes pop { 0% { transform: scale(.8); } 60% { transform: scale(1.09); } 100% { transform: scale(1); } }
+.peekaboo__eye { width: .9em; height: .9em; display: none; }
+.peekaboo.open .peekaboo__eye { display: inline-block; }
 
 /* ===== Confetti + toast ===== */
 .confetti-layer { position: fixed; inset: 0; z-index: 190; pointer-events: none; overflow: hidden; }

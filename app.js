@@ -201,13 +201,24 @@
   /* ---------- Peekaboo (click the logo) ---------- */
   var brand = document.querySelector(".brand");
   var peek = document.getElementById("peekaboo");
+  var peekTxt = peek ? peek.querySelector(".peekaboo__txt") : null;
+  var peekBusy = false;
+  function setPeekTxt(s) { if (peekTxt) peekTxt.textContent = s; }
   if (brand && peek) {
     brand.addEventListener("click", function () {
-      if (reduce) return; // let it just scroll to top
+      if (reduce || peekBusy) return; // let it just scroll to top
+      peekBusy = true;
       peek.classList.remove("open");
-      peek.classList.add("show");
-      setTimeout(function () { peek.classList.add("open"); }, 500);
-      setTimeout(function () { peek.classList.remove("show", "open"); }, 1550);
+      setPeekTxt("Where’s Benji?");
+      peek.classList.add("show");                 // slow cover (~1.15s), hold while covered
+      setTimeout(function () {                     // after cover + ~1s pause, reveal
+        setPeekTxt("There he is!");
+        peek.classList.add("open");
+      }, 2200);
+      setTimeout(function () {                     // let "There he is!" linger, then reset
+        peek.classList.remove("show", "open");
+        peekBusy = false;
+      }, 3600);
     });
   }
 
