@@ -23,7 +23,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -31,7 +31,7 @@
 
   <!-- Announcement bar -->
   <div class="announce">
-    <span class="announce__text">Tiny Human deployed to production.</span>
+    <span class="announce__text"><strong>v0.9.0</strong> shipped — crawling is now <strong>GA</strong>.</span>
     <a class="announce__cta" href="https://www.youtube.com/watch?v=P-MCFmyYCTc" target="_blank" rel="noopener nofollow"><span class="live-dot" aria-hidden="true"></span>View Live Cam</a>
   </div>
 
@@ -41,6 +41,12 @@
       <img class="brand__logo" src="assets/logo.svg" alt="BDS logo" width="40" height="40" />
       <span class="brand__name">Tiny Human</span>
     </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#metrics">Metrics</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#changelog">Changelog</a>
+      <a href="#feedback">Feedback</a>
+    </nav>
   </header>
 
   <!-- Hero -->
@@ -48,6 +54,7 @@
     <div class="hero__bg" role="img" aria-label="A baby's-eye view of two smiling parents, with a tiny thumbs-up in the foreground"></div>
     <div class="hero__scrim"></div>
     <div class="hero__inner">
+      <p class="hero__badge"><span class="live-dot" aria-hidden="true"></span> Now in production · Month 9</p>
       <h1 class="hero__title">Benjamin David Simon</h1>
       <p class="hero__tagline">Vision: Developing. Mission: Clear.</p>
     </div>
@@ -65,13 +72,79 @@
     </div>
   </section>
 
-  <!-- KPI strip -->
-  <section class="kpis" aria-label="Key performance indicators">
-    <div class="kpis__grid">
-      <div class="kpi"><span class="kpi__num">24/7</span><span class="kpi__label">Uptime <em>(crying included)</em></span></div>
-      <div class="kpi"><span class="kpi__num">∞</span><span class="kpi__label">Diapers deployed</span></div>
-      <div class="kpi"><span class="kpi__num">0</span><span class="kpi__label">Words spoken <em>(roadmapped)</em></span></div>
-      <div class="kpi"><span class="kpi__num">100%</span><span class="kpi__label">Stakeholder cuteness</span></div>
+  <!-- ===== Growth Dashboard ===== -->
+  <section class="dash" id="metrics" aria-label="Operating metrics">
+    <div class="dash__inner">
+      <p class="eyebrow">BDS Inc. · Q3 FY25 · Operating Metrics</p>
+      <h2 class="dash__title">The numbers are up and to the right.</h2>
+
+      <div class="metric-grid">
+        <article class="metric reveal">
+          <div class="metric__top"><span class="metric__icon">🦷</span><span class="trend up">▲ +4 QoQ</span></div>
+          <div class="metric__num"><span data-count="6">0</span></div>
+          <div class="metric__label">Teeth shipped</div>
+          <div class="bar"><i style="--w:60%"></i></div>
+        </article>
+
+        <article class="metric reveal">
+          <div class="metric__top"><span class="metric__icon">🗣️</span><span class="trend up">▲ beta</span></div>
+          <div class="metric__num"><span data-count="2">0</span></div>
+          <div class="metric__label">Words in beta <em>(“mama”, “dada”)</em></div>
+          <div class="bar"><i style="--w:25%"></i></div>
+        </article>
+
+        <article class="metric reveal">
+          <div class="metric__top"><span class="metric__icon">😴</span><span class="trend down">▼ 3→2</span></div>
+          <div class="metric__num"><span data-count="2">0</span></div>
+          <div class="metric__label">Naps / day <em>(efficiency gains)</em></div>
+          <div class="bar"><i style="--w:40%"></i></div>
+        </article>
+
+        <article class="metric reveal">
+          <div class="metric__top"><span class="metric__icon">🚼</span><span class="trend up">▲ GA</span></div>
+          <div class="metric__num"><span data-count="3">0</span><span class="metric__unit">mph</span></div>
+          <div class="metric__label">Top crawl speed <em>(claimed)</em></div>
+          <div class="bar"><i style="--w:55%"></i></div>
+        </article>
+
+        <article class="metric reveal">
+          <div class="metric__top"><span class="metric__icon">⏱️</span><span class="trend flat">SLA</span></div>
+          <div class="metric__num metric__num--sm">24/7</div>
+          <div class="metric__label">Uptime <em>(crying included)</em></div>
+          <div class="bar"><i style="--w:100%"></i></div>
+        </article>
+
+        <article class="metric reveal">
+          <div class="metric__top"><span class="metric__icon">⭐</span><span class="trend up">▲ peak</span></div>
+          <div class="metric__num"><span data-count="100">0</span><span class="metric__unit">%</span></div>
+          <div class="metric__label">Stakeholder cuteness</div>
+          <div class="bar"><i style="--w:100%"></i></div>
+        </article>
+      </div>
+
+      <!-- Literal growth chart -->
+      <figure class="chart-card reveal">
+        <figcaption class="chart-card__head">
+          <div>
+            <h3>Cumulative months live</h3>
+            <p>Sustained month-over-month growth since initial commit.</p>
+          </div>
+          <span class="trend up big">▲ 100% headcount retention <em>(n = 1)</em></span>
+        </figcaption>
+        <div class="chart" role="img" aria-label="Bar chart showing steady growth from month 0 to month 9">
+          <div class="chart__col" style="--h:11%"><i></i><span>0</span></div>
+          <div class="chart__col" style="--h:21%"><i></i><span>1</span></div>
+          <div class="chart__col" style="--h:31%"><i></i><span>2</span></div>
+          <div class="chart__col" style="--h:41%"><i></i><span>3</span></div>
+          <div class="chart__col" style="--h:50%"><i></i><span>4</span></div>
+          <div class="chart__col" style="--h:60%"><i></i><span>5</span></div>
+          <div class="chart__col" style="--h:69%"><i></i><span>6</span></div>
+          <div class="chart__col" style="--h:79%"><i></i><span>7</span></div>
+          <div class="chart__col" style="--h:89%"><i></i><span>8</span></div>
+          <div class="chart__col is-now" style="--h:100%"><i></i><span>9</span></div>
+        </div>
+        <p class="chart-card__foot">Months &middot; <span>Forward guidance: more months expected.</span></p>
+      </figure>
     </div>
   </section>
 
@@ -81,40 +154,173 @@
 
       <section class="col">
         <h2 class="col__head">About</h2>
-        <p>Benjamin recently entered the world with a clear mission:</p>
+        <p>Now nine months into a high-growth journey, Benjamin remains laser-focused on the mission:</p>
         <ul>
           <li>Drive results (and parents) around the clock</li>
           <li>Optimize nap and snack schedules</li>
-          <li>Innovate in the field of peekaboo engagement</li>
+          <li>Scale peekaboo engagement to new verticals</li>
         </ul>
 
         <h3 class="col__sub">Core Competencies</h3>
         <ul>
+          <li>Full-stack crawling <span class="chip chip--ga">GA</span></li>
+          <li>Object permanence <span class="chip chip--ga">GA</span></li>
           <li>Strategic crying deployment</li>
-          <li>Rapid milk&#8209;to&#8209;sleep conversion</li>
+          <li>Solid-food integration <span class="chip chip--beta">beta</span></li>
           <li>Agile diaper disruption management</li>
         </ul>
       </section>
 
       <section class="col">
         <h2 class="col__head">Experience</h2>
-
-        <div class="job">
-          <p class="job__title">Chief Drool Officer <span class="job__dates">(2025 &ndash; present)</span></p>
-          <p class="job__desc">Implemented high&#8209;volume drool production, exceeding quarterly projections.</p>
-        </div>
-
-        <div class="job">
-          <p class="job__title">Nap Strategist <span class="job__dates">(2025 &ndash; present)</span></p>
-          <p class="job__desc">Spearheaded irregular but impactful nap schedules, often without warning.</p>
-        </div>
+        <ol class="timeline">
+          <li class="tl reveal">
+            <span class="tl__dot"></span>
+            <p class="tl__role">VP of Mobility, Crawling Division <span class="chip chip--now">current</span></p>
+            <p class="tl__meta">Month 7 – present</p>
+            <p class="tl__desc">Led the successful rollout of quadrupedal locomotion. Now piloting a vertical initiative (pulling to stand).</p>
+          </li>
+          <li class="tl reveal">
+            <span class="tl__dot"></span>
+            <p class="tl__role">Director of Object Permanence</p>
+            <p class="tl__meta">Month 8 – present</p>
+            <p class="tl__desc">Confirmed that things continue to exist when hidden. Peekaboo unit economics improved materially.</p>
+          </li>
+          <li class="tl reveal">
+            <span class="tl__dot"></span>
+            <p class="tl__role">Head of Peekaboo</p>
+            <p class="tl__meta">Month 6 – present</p>
+            <p class="tl__desc">Now reciprocates. Engagement is up and to the right.</p>
+          </li>
+          <li class="tl reveal">
+            <span class="tl__dot"></span>
+            <p class="tl__role">Chief Drool Officer <span class="chip">founding</span></p>
+            <p class="tl__meta">Month 0 – present</p>
+            <p class="tl__desc">Founding role. Maintains high-volume drool output, consistently exceeding quarterly projections.</p>
+          </li>
+        </ol>
       </section>
 
     </div>
   </main>
 
+  <!-- ===== Roadmap ===== -->
+  <section class="roadmap" id="roadmap" aria-label="Product roadmap">
+    <div class="roadmap__inner">
+      <p class="eyebrow">Product Roadmap · subject to change without warning</p>
+      <h2 class="roadmap__title">The development pipeline</h2>
+
+      <div class="board">
+        <div class="lane reveal">
+          <header class="lane__head lane__head--done"><span>✅ Shipped</span><b>7</b></header>
+          <article class="card"><p>Rolling over</p><span class="tag tag--p0">P0</span></article>
+          <article class="card"><p>Sitting unassisted</p><span class="tag">core</span></article>
+          <article class="card"><p>First tooth <em>×6</em></p><span class="tag">hardware</span></article>
+          <article class="card"><p>Crawling</p><span class="tag tag--p0">P0</span><span class="tag tag--ga">GA</span></article>
+          <article class="card"><p>Waves “bye-bye”</p><span class="tag">social</span></article>
+          <article class="card"><p>Eats solids</p><span class="tag">beta</span></article>
+          <article class="card"><p>Responds to name</p><span class="tag">core</span></article>
+        </div>
+
+        <div class="lane reveal">
+          <header class="lane__head lane__head--prog"><span>🚧 In Progress</span><b>4</b></header>
+          <article class="card"><p>Pulling to stand</p><span class="tag tag--p0">P0</span></article>
+          <article class="card"><p>Cruising furniture</p><span class="tag">mobility</span></article>
+          <article class="card"><p>Pincer grasp</p><span class="tag">fine-motor</span></article>
+          <article class="card"><p>“Mama”/“Dada” disambiguation</p><span class="tag tag--blocked">pending review</span></article>
+        </div>
+
+        <div class="lane reveal">
+          <header class="lane__head lane__head--todo"><span>🗓️ Backlog</span><b>5</b></header>
+          <article class="card"><p>Walking</p><span class="tag">Q4 target</span></article>
+          <article class="card"><p>Talking</p><span class="tag">stretch</span></article>
+          <article class="card"><p>Using a spoon</p><span class="tag">research</span></article>
+          <article class="card"><p>Sleeping through the night</p><span class="tag tag--blocked">deprioritized</span></article>
+          <article class="card card--wontfix"><p>Potty training</p><span class="tag tag--wontfix">wontfix</span></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Changelog ===== -->
+  <section class="changelog" id="changelog" aria-label="Release notes">
+    <div class="changelog__inner">
+      <p class="eyebrow eyebrow--light">Release Notes</p>
+      <h2 class="changelog__title">Patch history</h2>
+
+      <ol class="releases">
+        <li class="rel reveal">
+          <div class="rel__rail"><span class="rel__node"></span></div>
+          <div class="rel__body">
+            <div class="rel__head">
+              <span class="ver ver--now">v0.9.0</span>
+              <span class="rel__name">“The Crawler”</span>
+              <span class="rel__when">Month 9 · current</span>
+            </div>
+            <ul class="notes">
+              <li class="add"><code>+</code> Crawling promoted to <b>GA</b></li>
+              <li class="add"><code>+</code> Shipped 6 teeth (rolling release)</li>
+              <li class="add"><code>+</code> Waves “bye-bye”; pincer grasp <em>(beta)</em></li>
+              <li class="chg"><code>~</code> Consolidated nap schedule 3 → 2</li>
+              <li class="warn"><code>!</code> Known issue: separation anxiety on parent exit</li>
+              <li class="warn"><code>!</code> Drool logging volume increased (teething)</li>
+              <li class="rem"><code>-</code> Deprecated the swaddle</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="rel reveal">
+          <div class="rel__rail"><span class="rel__node"></span></div>
+          <div class="rel__body">
+            <div class="rel__head">
+              <span class="ver">v0.7.0</span>
+              <span class="rel__name">“Sit &amp; Babble”</span>
+              <span class="rel__when">Month 7</span>
+            </div>
+            <ul class="notes">
+              <li class="add"><code>+</code> Sitting unassisted</li>
+              <li class="add"><code>+</code> Babbling with consonants</li>
+              <li class="add"><code>+</code> First tooth (v1 hardware)</li>
+              <li class="chg"><code>~</code> Improved grip strength &amp; reach</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="rel reveal">
+          <div class="rel__rail"><span class="rel__node"></span></div>
+          <div class="rel__body">
+            <div class="rel__head">
+              <span class="ver">v0.4.0</span>
+              <span class="rel__name">“Rollout”</span>
+              <span class="rel__when">Month 4</span>
+            </div>
+            <ul class="notes">
+              <li class="add"><code>+</code> Rolling over (both directions)</li>
+              <li class="add"><code>+</code> Grabbing objects</li>
+              <li class="add"><code>+</code> Laughing on demand</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="rel reveal">
+          <div class="rel__rail"><span class="rel__node"></span></div>
+          <div class="rel__body">
+            <div class="rel__head">
+              <span class="ver">v0.0.1</span>
+              <span class="rel__name">“Initial Commit”</span>
+              <span class="rel__when">Month 0</span>
+            </div>
+            <ul class="notes">
+              <li class="add"><code>+</code> Born. <span class="hello">Hello, world.</span></li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- Feedback -->
-  <section class="feedback">
+  <section class="feedback" id="feedback">
     <div class="feedback__inner">
       <div class="feedback__brand">
         <img src="assets/logo.svg" alt="BDS logo" width="80" height="80" />
@@ -145,8 +351,9 @@
     <p class="footer__legal"><strong>Legal notice:</strong> May contain spit-up.</p>
   </footer>
 
+  <script src="app.js" defer></script>
   <script>
-    console.log("%c👶 Tiny Human v1.0.0 — now serving milk-driven content.", "font-size:14px;font-weight:700;color:#1c4587;");
+    console.log("%c👶 Tiny Human v0.9.0 — now crawling.", "font-size:14px;font-weight:700;color:#1c4587;");
     console.log("%cHiring soon: Junior VP of Peekaboo. No experience required.", "color:#5f6368;");
   </script>
 
