@@ -374,6 +374,19 @@ a { color: inherit; }
   margin-right: 4px;
 }
 
+/* ===== Icons (Lucide sprite) ===== */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ico {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
 /* ===== Shared section bits ===== */
 .eyebrow {
   text-transform: uppercase;
@@ -447,7 +460,8 @@ a { color: inherit; }
   background: rgba(255,255,255,.07);
 }
 .metric__top { display: flex; align-items: center; justify-content: space-between; }
-.metric__icon { font-size: 1.3rem; }
+.metric__icon { display: inline-flex; color: var(--sky); }
+.metric__icon .ico { width: 24px; height: 24px; }
 .metric__num {
   font-size: clamp(2.1rem, 5vw, 2.8rem);
   font-weight: 700;
@@ -571,6 +585,8 @@ a { color: inherit; }
   border-bottom: 2px solid transparent;
   margin-bottom: 10px;
 }
+.lane__head > span { display: inline-flex; align-items: center; gap: 8px; }
+.lane__head .ico { width: 18px; height: 18px; }
 .lane__head b {
   font-size: .78rem;
   background: rgba(0,0,0,.07);
