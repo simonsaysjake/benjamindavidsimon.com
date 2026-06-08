@@ -8,14 +8,12 @@ so it can be hosted for free on **GitHub Pages**.
 | File | Purpose |
 |------|---------|
 | `index.html` | The whole site (single page) |
-| `styles.css` | All styling — Lexend type, blue accents, dark feedback section |
+| `styles.css` | All styling — Lexend type, blue accents, dark sections |
+| `app.js` | Scroll reveals, count-up metrics, live status page, theme toggle, peekaboo/confetti/Konami |
 | `assets/hero.jpg` | Baby's-eye-view hero photo (web-optimized) |
 | `assets/logo.svg` | "BDS" pacifier monogram (also the favicon) |
 | `CNAME` | Tells GitHub Pages to serve the site at `benjamindavidsimon.com` |
 | `.nojekyll` | Disables Jekyll processing (serves files as-is) |
-
-The "Submit feedback" section embeds the **same Google Form** as the original
-(`Q2 Life and Growth Plan`), so responses keep flowing to the same place — nothing to migrate there.
 
 ## Local preview
 
