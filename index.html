@@ -20,6 +20,17 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
 
+  <!-- Apply saved theme before paint (no flash) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (!t && window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) t = "night";
+        if (t === "night") document.documentElement.setAttribute("data-theme", "night");
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,6 +51,8 @@
     <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-hammer" viewBox="0 0 24 24"><path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></symbol>
     <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1"/><path d="M16 2v4"/><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M3 10h5"/><path d="M8 2v4"/><circle cx="16" cy="16" r="6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
   </svg>
 
   <!-- Announcement bar -->
@@ -57,10 +70,23 @@
     <nav class="nav" aria-label="Primary">
       <a href="#metrics">Metrics</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#status">Status</a>
       <a href="#changelog">Changelog</a>
       <a href="#feedback">Feedback</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Toggle night shift">
+        <svg class="ico ico--sun"><use href="#i-sun"/></svg>
+        <svg class="ico ico--moon"><use href="#i-moon"/></svg>
+        <span class="theme-toggle__txt">Night shift</span>
+      </button>
     </nav>
   </header>
+
+  <!-- Peekaboo easter egg overlay -->
+  <div class="peekaboo" id="peekaboo" aria-hidden="true">
+    <div class="peekaboo__panel peekaboo__panel--l"></div>
+    <div class="peekaboo__panel peekaboo__panel--r"></div>
+    <div class="peekaboo__word"><svg class="ico"><use href="#i-eye"/></svg> Peekaboo!</div>
+  </div>
 
   <!-- Hero -->
   <section class="hero" id="top">
@@ -332,6 +358,85 @@
     </div>
   </section>
 
+  <!-- ===== System Status ===== -->
+  <section class="status" id="status" aria-label="System status">
+    <div class="status__inner">
+      <p class="eyebrow">System Status · live</p>
+      <h2 class="status__title">Operational status</h2>
+
+      <div class="status__banner" id="statusBanner">
+        <span class="status__bdot"></span>
+        <span class="status__btext">Checking systems…</span>
+        <span class="status__btime" id="statusTime" aria-live="polite"></span>
+      </div>
+
+      <ul class="components" id="components">
+        <li class="comp" data-key="sleep">
+          <div class="comp__main"><span class="comp__name">Sleep API</span><span class="comp__note"></span></div>
+          <span class="comp__pill">—</span>
+        </li>
+        <li class="comp" data-key="feed">
+          <div class="comp__main"><span class="comp__name">Feeding Service</span><span class="comp__note"></span></div>
+          <span class="comp__pill">—</span>
+        </li>
+        <li class="comp" data-key="diaper">
+          <div class="comp__main"><span class="comp__name">Diaper Processing</span><span class="comp__note"></span></div>
+          <span class="comp__pill">—</span>
+        </li>
+        <li class="comp" data-key="voice">
+          <div class="comp__main"><span class="comp__name">Vocalization Engine</span><span class="comp__note"></span></div>
+          <span class="comp__pill">—</span>
+        </li>
+        <li class="comp" data-key="mobility">
+          <div class="comp__main"><span class="comp__name">Mobility · Crawl Cluster</span><span class="comp__note"></span></div>
+          <span class="comp__pill">—</span>
+        </li>
+        <li class="comp" data-key="mood">
+          <div class="comp__main"><span class="comp__name">Mood &amp; Cuteness CDN</span><span class="comp__note"></span></div>
+          <span class="comp__pill">—</span>
+        </li>
+      </ul>
+
+      <div class="uptime">
+        <div class="uptime__head"><span>90-day uptime</span><b>62.5%</b></div>
+        <div class="uptime__bars" id="uptimeBars" aria-hidden="true"></div>
+        <div class="uptime__legend"><span>90 days ago</span><span>SLA: aspirational</span><span>today</span></div>
+      </div>
+
+      <h3 class="status__sub">Incident history</h3>
+      <ol class="incidents">
+        <li class="inc reveal">
+          <span class="inc__tag inc__tag--resolved">Resolved</span>
+          <div>
+            <p class="inc__title">Major outage — Vocalization Engine</p>
+            <p class="inc__body">Inconsolable crying from 2:14–2:46 AM. Root cause: trapped gas. Mitigation: burp deployed to prod. Postmortem: tummy massage added to runbook.</p>
+          </div>
+        </li>
+        <li class="inc reveal">
+          <span class="inc__tag inc__tag--resolved">Resolved</span>
+          <div>
+            <p class="inc__title">Degraded performance — Diaper Processing</p>
+            <p class="inc__body">Payload exceeded container capacity (blowout). Outfit rolled back to last known good. Affected region: entire onesie.</p>
+          </div>
+        </li>
+        <li class="inc reveal">
+          <span class="inc__tag inc__tag--watch">Monitoring</span>
+          <div>
+            <p class="inc__title">Sleep API — recurring 4 AM wake events</p>
+            <p class="inc__body">Engineers (parents) paged repeatedly. Cause under investigation. No ETA. Coffee consumption elevated.</p>
+          </div>
+        </li>
+        <li class="inc reveal">
+          <span class="inc__tag inc__tag--resolved">Resolved</span>
+          <div>
+            <p class="inc__title">Feeding Service — HTTP 418</p>
+            <p class="inc__body">Strained peas rejected with status <code>418 I'm a teapot</code>. Failover to sweet potato succeeded.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- Feedback -->
   <section class="feedback" id="feedback">
     <div class="feedback__inner">
@@ -368,6 +473,7 @@
   <script>
     console.log("%c👶 Tiny Human v0.9.0 — now crawling.", "font-size:14px;font-weight:700;color:#1c4587;");
     console.log("%cHiring soon: Junior VP of Peekaboo. No experience required.", "color:#5f6368;");
+    console.log("%cPsst — try the Konami code. ↑↑↓↓←→←→ B A", "color:#5f6368;");
   </script>
 
 </body>
